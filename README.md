@@ -19,6 +19,19 @@ ChrisMacBookPro:segmenter cchuter$ python -m aeneas.diagnostics
 [INFO] All required dependencies are met and all available Python C extensions are working
 ```
 
+## Create your reading text
+
+I get public domain books from https://gutenberg.org and the I "textify" them.
+
+See the samples directory. And run the command:
+`python ../../textify.py -g -i pg61895.txt -o pg61895.tts`
+
+## Record your reading
+
+## Use aneas to carve up the wave files
+
+## Machine Learn
+
 ### Troubleshooting
 Python on macOS (using brew install python), you need this to get `pip` to work
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
