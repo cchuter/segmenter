@@ -7,7 +7,6 @@ nltk.download('punkt')
 
 inputfile = ''
 outputfile = ''
-prefix = 'CC'
 gutenberg = False
 
 def gutenlinemake():
@@ -29,9 +28,10 @@ def gutenlinemake():
 
     #splitup lines by sentences
     tmp.seek(0)
-    count = 0
+    count = 1
     for sentence in tokenize.sent_tokenize(tmp.read()):
-        ofile.write(inputfile+"-"+'{:05d}'.format(count)+"|"+sentence+'\n')
+        #ofile.write(inputfile+"-"+'{:05d}'.format(count)+"|"+sentence+'\n')
+        ofile.write(sentence+'\n')
         count += 1
     tmp.truncate()
     tmp.close()
@@ -43,9 +43,10 @@ def gutenlinemake():
 def linemake():
     ifile = open(inputfile,"r")
     ofile = open(outputfile,"w")
-    count = 0
+    count = 1
     for sentence in tokenize.sent_tokenize(ifile.read()): 
-        ofile.write(inputfile+"-"+'{:05d}'.format(count)+"|"+sentence+'\n')
+        #ofile.write(inputfile+"-"+'{:05d}'.format(count)+"|"+sentence+'\n')
+        ofile.write(sentence+'\n')
         count += 1
     ifile.close()
     ofile.close()
@@ -54,16 +55,15 @@ def main(argv):
     global inputfile
     global outputfile
     global gutenberg
-    global prefix
     try:
-        opts, args = getopt.getopt(argv,"hi:o:gp:",["ifile=","ofile="])
+        opts, args = getopt.getopt(argv,"hi:o:g",["ifile=","ofile="])
     except getopt.GetoptError:
-        print ('textify.py -i <inputfile> -o <outputfile> -p <prefix:[default CC]>')
+        print ('textify.py -i <inputfile> -o <outputfile>')
         print ('add a -g or --gutenberg to remove legal cruft from the text ebook')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print ('textify.py -g -i <inputfile> -o <outputfile> -p <prefix:[default CC]>')
+            print ('textify.py -g -i <inputfile> -o <outputfile>')
             sys.exit()
         elif opt in ("-i", "--ifile"):
             inputfile = arg
@@ -74,9 +74,10 @@ def main(argv):
         elif opt in ("-g"):
             gutenberg = True
             print ('gutenberg:', gutenberg)
-        elif opt in ("-p"):
-            prefix = arg
-            print ('prefix:', prefix)
+    if not inputfile or not outputfile:
+        print ('textify.py -i <inputfile> -o <outputfile>')
+        print ('add a -g or --gutenberg to remove legal cruft from the text ebook')
+        sys.exit(2)        
         
 if __name__ == "__main__":
     main(sys.argv[1:])

@@ -21,14 +21,20 @@ ChrisMacBookPro:segmenter cchuter$ python -m aeneas.diagnostics
 
 ## Create your reading text
 
-I get public domain books from https://gutenberg.org and the I "textify" them.
+I get public domain books from https://gutenberg.org and then I "textify" them.
 
 See the samples directory. And run the command:
 `python ../../textify.py -g -i pg61895.txt -o pg61895.tts`
 
 ## Record your reading
 
-## Use aneas to carve up the wave files
+I use 22KHz wav files
+
+## Use Aeneas and pydub to carve up the wave files
+
+https://github.com/jiaaro/pydub
+
+`python soundify.py -s test.wav -t test.txt -o test`
 
 ## Machine Learn
 
